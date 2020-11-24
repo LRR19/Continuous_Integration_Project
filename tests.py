@@ -1,5 +1,4 @@
 import unittest
-from datetime import datetime
 from task import leap_yr, my_datetime
 
 
