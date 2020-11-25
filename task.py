@@ -54,3 +54,69 @@ def my_datetime(num_sec):
     current_year = epoc_year + get_calc_year
     return str(current_month).zfill(2) + '-' + str(current_day).zfill(
         2) + '-' + str(current_year)
+
+
+# PART 3: This part of task.py converts int to hex string
+# Core helper function that converts int to big endian hex
+def int_to_hex(num):
+    hex_string = '0123456789ABCDEF'
+    converted = ''
+    number = num
+    remainder = -1
+    count = 0
+
+    while number >= 0:
+        remainder = number % 16
+        number = number // 16
+        count += 1
+
+        if number == 0:
+            if count % 2 == 1:
+                return '0' + hex_string[remainder] + converted
+            return hex_string[remainder] + converted
+        else:
+            converted = hex_string[remainder] + converted
+
+
+# Helper function that converts big endian to little endian
+def little_endian(hex_string):
+    length = len(hex_string)
+    converted = [''] * length
+    half = len(hex_string) // 2
+    if half % 2 == 1:
+        half -= 1
+        converted[half] = hex_string[half]
+        converted[half + 1] = hex_string[half + 1]
+
+    for i in range(0, half, 2):
+        converted[i] = hex_string[length - i - 2]
+        converted[i + 1] = hex_string[length - i - 1]
+        converted[length - i - 2] = hex_string[i]
+        converted[length - i - 1] = hex_string[i + 1]
+
+    return "".join(converted)
+
+
+# Helper function that formats the hex to be separated by space per byte
+def format_hex(hex_string):
+    formatted = hex_string
+    j = iter(formatted)
+    return ' '.join(i + k for i, k in zip(j, j))
+
+
+# Main function that utilizes above helpers, adds negative if num is negative
+def conv_endian(num, endian='big'):
+    abs_num = abs(num)
+    to_hex = int_to_hex(abs_num)
+    if endian == 'little':
+        to_hex = little_endian(to_hex)
+    elif endian != 'big' and endian != 'little':
+        return None
+
+    to_hex = format_hex(to_hex)
+
+    if num < 0:
+        return "-" + to_hex
+    else:
+        return to_hex
+
