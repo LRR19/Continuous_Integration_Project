@@ -9,6 +9,40 @@ epoc_year = 1970
 epoc_month = 1
 epoc_day = 1
 
+valid_hex_num = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 
+    'A', 'B', 'C', 'D', 'E', 'F', 'a', 'b', 'c', 'd', 'e', 'f'}
+
+# Part 1
+# Convert Hex to Decimal
+# Helper function that returns the number of periods in given string
+def count_period(str):
+    count = 0
+    for char in str:
+        if char == '.':
+            count += 1
+
+    return count
+
+# Helper function that returns true if given char is a valid hex number - 0-9, A-F, a-f
+def valid_hex_digit(hex_digit):
+    if hex_digit in valid_hex_num:
+        return True
+    return False
+
+# Helper function that returns true if given str is starts with 0x (postive hex number)
+def pos_hex_num(hex_str):
+    if hex_str.startswith('0x'):
+        return True
+    return False
+
+# helper function that returns true if given string start with -0x (negative hex number)
+def neg_hex_num(hex_str):
+    if hex_str.startswith('-0x'):
+        return True
+    return False
+
+#------------------------------------
+
 
 def leap_yr(lp_year):
     """Helper func: Returns true if it's a leap year and False if it's not"""
