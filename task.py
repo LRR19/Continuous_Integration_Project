@@ -46,6 +46,8 @@ def calc_month(secs) -> int:
         for v in LEAP_MONTH_DAYS:
             sec_in_month = v * day
             if rem_secs - sec_in_month < 0:
+                if abs(rem_secs - sec_in_month) == day:  # midnight 12:00am
+                    m += 1
                 break
             else:
                 rem_secs -= sec_in_month
@@ -54,6 +56,8 @@ def calc_month(secs) -> int:
         for v in REG_MONTH_DAYS:
             sec_in_month = v * day
             if rem_secs - sec_in_month < 0:
+                if abs(rem_secs - sec_in_month) == day:  # midnight 12:00am
+                    m += 1
                 break
             else:
                 rem_secs -= sec_in_month
@@ -90,6 +94,8 @@ def calc_day(secs) -> int:
             num_days = LEAP_MONTH_DAYS[counter]
             total_sec_in_month = num_days * day
             if rem_secs - total_sec_in_month < 0:
+                if abs(rem_secs - total_sec_in_month) == day:  # midnight 12:00am
+                    return 0
                 return math.floor(rem_secs / day)
             else:
                 rem_secs -= total_sec_in_month
@@ -100,6 +106,8 @@ def calc_day(secs) -> int:
             num_days = REG_MONTH_DAYS[counter]
             total_sec_in_month = num_days * day
             if rem_secs - total_sec_in_month < 0:
+                if abs(rem_secs - total_sec_in_month) == day:  # midnight 12:00am
+                    return 0
                 return math.floor(rem_secs / day)
             else:
                 rem_secs -= total_sec_in_month
