@@ -19,25 +19,16 @@ def conv_num(num_str):
     hex_to_int = 0
     pwr = 0
 
-    # Returns none to handle empty string
-    if num_str == '':
+    # Returns none if empty string or there is more than 1 period
+    if count_period(num_str) > 1 or num_str == '':
         return None
 
-    # Returns none if there is more than 1 period
-    if count_period(num_str) > 1:
-        return None
-
-    if num_str.startswith('.') is True or num_str.endswith('.') is True:
-        return format_float(num_str)
-
-    # For loop to determine value of positive hex
+    # For loop to determine value of hex
     for digit in reversed(num_str):
         if valid_hex_digit(digit):
             hex_to_int += convert_lower(digit) * 16 ** pwr
             pwr += 1
-        if digit == 'x':
-            continue
-        if digit == '-':
+        if digit == 'x' or digit == '-':
             continue
         if not valid_hex_digit(digit):
             return None
@@ -46,7 +37,7 @@ def conv_num(num_str):
     return hex_to_int
 
     if pos_hex_num(num_str) is False and neg_hex_num(num_str) is False:
-        return num_str
+        return format_float(num_str)
 
     return None
 
