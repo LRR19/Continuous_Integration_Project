@@ -18,10 +18,23 @@ def leap_yr(lp_year):
 
 def calc_year(secs) -> int:
     """Converts seconds to a year"""
-    some_year = secs / year
-    # take the number before the decimal
-    a_year = some_year // 1
-    return math.trunc(a_year)
+    current_year_in_sec = 0
+    while True:
+        if leap_yr(math.floor(current_year_in_sec / year) + epoc_year):
+            if current_year_in_sec + year + day <= secs:
+                current_year_in_sec += year + day
+            else:
+                break
+        else:
+            if current_year_in_sec + year <= secs:
+                current_year_in_sec += year
+            else:
+                break
+
+    # if leap_yr(math.floor(current_year_in_sec / year) + epoc_year):
+    #     return math.floor(current_year_in_sec / (year + day))
+    # else:
+    return math.floor(current_year_in_sec / year)
 
 
 def calc_month(secs) -> int:
@@ -92,6 +105,7 @@ def calc_day(secs) -> int:
                 rem_secs -= total_sec_in_month
                 counter += 1
 
+    return math.floor(rem_secs / day)
     # rem_secs /= day
     # if 0 < rem_secs < 1:
     #     rem_secs = 1
@@ -99,7 +113,6 @@ def calc_day(secs) -> int:
     #     rem_secs = math.floor(rem_secs)
     #
     # return rem_secs
-
 
 
 def my_datetime(num_sec):
