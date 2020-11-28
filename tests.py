@@ -1,7 +1,7 @@
 import unittest
 from task import leap_yr, my_datetime
 from task import conv_endian
-from task import count_period, valid_hex_digit, pos_hex_num, neg_hex_num
+from task import count_period, valid_hex_digit, pos_hex_num, neg_hex_num, conv_num, format_float
 
 
 class TestCase(unittest.TestCase):
@@ -38,13 +38,19 @@ class TestCase(unittest.TestCase):
         self.assertEqual(count_period('abc....def'), 4)
 
     def test_valid_hex_digit(self):
-        self.assertTrue(valid_hex_digit(1))
+        self.assertTrue(valid_hex_digit('1'))
 
     def test_pos_hex_num(self):
         self.assertTrue(pos_hex_num('0xA'))
 
     def test_neg_hex_num(self):
         self.assertTrue(neg_hex_num('-0xA'))
+
+    def test_conv_num(self):
+        self.assertEqual(conv_num(''), 26)
+
+    def test_format_float(self):
+        self.assertEqual(format_float('.123'), '0.123')
 
 if __name__ == '__main__':
     unittest.main()
