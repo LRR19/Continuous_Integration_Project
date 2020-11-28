@@ -96,7 +96,9 @@ def calc_day(secs) -> int:
             if rem_secs - total_sec_in_month < 0:
                 if abs(rem_secs - total_sec_in_month) == day:  # midnight 12:00am
                     return 0
-                elif abs(rem_secs - total_sec_in_month) == day + day:  # leap day @ midnight 12:00am
+                elif abs(rem_secs - total_sec_in_month) >= day + day or abs(
+                        rem_secs - total_sec_in_month) <= day + day - 1:
+                    # leap day @ midnight 12:00am - leap day @ 11:59:59pm
                     return math.floor(rem_secs / day) + 1
                 return math.floor(rem_secs / day)
             else:
