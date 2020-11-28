@@ -5,8 +5,8 @@ from task import count_period, valid_hex_digit, pos_hex_num, neg_hex_num, conv_n
 
 
 class TestCase(unittest.TestCase):
-
     """Unit tests for function 2 - def my_datetime(num_sec)"""
+
     def test_leap_yr_func(self):
         self.assertTrue(leap_yr(2000))
 
@@ -51,6 +51,7 @@ class TestCase(unittest.TestCase):
 
     def test_format_float(self):
         self.assertEqual(format_float('.123'), '0.123')
+
 
 if __name__ == '__main__':
     unittest.main()

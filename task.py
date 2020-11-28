@@ -9,8 +9,8 @@ epoc_year = 1970
 epoc_month = 1
 epoc_day = 1
 
-valid_hex_num = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 
-    'A', 'B', 'C', 'D', 'E', 'F', 'a', 'b', 'c', 'd', 'e', 'f']
+valid_hex_num = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+                 'A', 'B', 'C', 'D', 'E', 'F', 'a', 'b', 'c', 'd', 'e', 'f']
 
 
 # Part 1
@@ -23,64 +23,59 @@ def conv_num(num_str):
     if num_str == '':
         return None
 
-
     # Returns none if there is more than 1 period
     if count_period(num_str) > 1:
         return None
-
 
     if num_str.startswith('.') == True or num_str.endswith('.') == True:
         return format_float(num_str)
 
     # For loop to determine value of positive hex values        
-    if pos_hex_num(num_str) == True:
+    if pos_hex_num(num_str):
         for digit in reversed(num_str):
-            if valid_hex_digit(digit) == True:
+            if valid_hex_digit(digit):
                 # Get hex value from hex list
                 hex_val = valid_hex_num.index(digit)
                 if hex_val < 16:
-                    hex_to_int += valid_hex_num.index(digit) * 16**pwr
+                    hex_to_int += valid_hex_num.index(digit) * 16 ** pwr
                 else:
                     # Convert lowercase hex numbers to correct hex value
-                    hex_to_int += (hex_val - 6) * 16**pwr
+                    hex_to_int += (hex_val - 6) * 16 ** pwr
                 pwr += 1
             if digit == 'x':
                 continue
-            if valid_hex_digit(digit) == False:
+            if not valid_hex_digit(digit):
                 return None
         return hex_to_int
 
-
     # For loop to determine value of negative hex values
-    if neg_hex_num(num_str) == True:
+    if neg_hex_num(num_str):
         for digit in reversed(num_str):
-            if valid_hex_digit(digit) == True:
+            if valid_hex_digit(digit):
                 hex_val = valid_hex_num.index(digit)
                 if hex_val < 16:
-                    hex_to_int += valid_hex_num.index(digit) * 16**pwr
+                    hex_to_int += valid_hex_num.index(digit) * 16 ** pwr
                 else:
-                    hex_to_int += (hex_val - 6) * 16**pwr
+                    hex_to_int += (hex_val - 6) * 16 ** pwr
                 pwr += 1
             if digit == 'x':
                 continue
             if digit == '-':
                 continue
-            if valid_hex_digit(digit) == False:
+            if not valid_hex_digit(digit):
                 return None
         return hex_to_int * -1
 
-
-    if pos_hex_num(num_str) == False and neg_hex_num(num_str) == False:
+    if pos_hex_num(num_str) is False and neg_hex_num(num_str) is False:
         return num_str
-
 
     return None
 
 
 # Helper function that returns the number of periods in given string
-def count_period(str):
+def count_period(hex_str):
     count = 0
-    for char in str:
+    for char in hex_str:
         if char == '.':
             count += 1
 
@@ -94,7 +89,7 @@ def valid_hex_digit(hex_digit):
     return False
 
 
-# Helper function that returns true if given str is starts with 0x (postive hex number)
+# Helper function that returns true if given str is starts with 0x (positive hex number)
 def pos_hex_num(hex_str):
     if hex_str.startswith('0x'):
         return True
@@ -109,14 +104,14 @@ def neg_hex_num(hex_str):
 
 
 # Helper function that adds a 0 before or after number that begins or ends with a period
-def format_float(str):
+def format_float(hex_str):
     if str.startswith('.'):
         return '0' + str
     elif str.endswith('.'):
         return str + '0'
 
 
-#------------------------------------
+# ------------------------------------
 
 
 def leap_yr(lp_year):
@@ -228,4 +223,3 @@ def conv_endian(num, endian='big'):
         return "-" + to_hex
     else:
         return to_hex
-
