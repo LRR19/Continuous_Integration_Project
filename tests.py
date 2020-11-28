@@ -1,7 +1,8 @@
 import unittest
 from task import leap_yr, my_datetime
 from task import conv_endian
-from task import count_period, valid_hex_digit, pos_hex_num, neg_hex_num, conv_num, format_float
+from task import count_period, valid_hex_digit, pos_hex_num
+from task import neg_hex_num, conv_num, format_float
 
 
 class TestCase(unittest.TestCase):

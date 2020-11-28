@@ -52,28 +52,28 @@ def count_period(hex_str):
     return count
 
 
-# Helper function that returns true if given char is a valid hex number - 0-9, A-F, a-f
+# Helper function that checks for valid hex number
 def valid_hex_digit(hex_digit):
     if hex_digit in valid_hex_num:
         return True
     return False
 
 
-# Helper function that returns true if given str is starts with 0x (positive hex number)
+# Helper function that returns true if hex value is positive
 def pos_hex_num(hex_str):
     if hex_str.startswith('0x'):
         return True
     return False
 
 
-# Helper function that returns true if given string start with -0x (negative hex number)
+# Helper function returns true if negative hex value
 def neg_hex_num(hex_str):
     if hex_str.startswith('-0x'):
         return True
     return False
 
 
-# Helper function that adds a 0 before or after number that begins or ends with a period
+# Helper function that inserts missing 0 next to period
 def format_float(hex_str):
     if hex_str.startswith('.'):
         return '0' + hex_str
