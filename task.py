@@ -31,6 +31,8 @@ def conv_num(num_str):
             continue
         if not valid_hex_digit(digit):
             return None
+    if pos_hex_num(num_str) is False and neg_hex_num(num_str) is False:
+        return num_str
     if neg_hex_num(num_str):
         return hex_to_int * -1
     return hex_to_int
@@ -41,10 +43,10 @@ def invalid_hex_string(hex_str):
     if count_period(hex_str) > 1 or hex_str == '':
         return True
     if pos_hex_num(hex_str) is False and neg_hex_num(hex_str) is False:
-        for digit in hex_str:
-            hex_index = valid_hex_num.index(digit)
-            if hex_index > 0:
-                return True
+        for hex_digit in hex_str:
+            if valid_hex_digit(hex_digit):
+                if valid_hex_num.index(hex_digit) > 9:
+                    return True
     count_x = 0
     count_neg = 0
     for digit in hex_str:
