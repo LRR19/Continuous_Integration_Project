@@ -27,44 +27,23 @@ def conv_num(num_str):
     if count_period(num_str) > 1:
         return None
 
-    if num_str.startswith('.') == True or num_str.endswith('.') == True:
+    if num_str.startswith('.') is True or num_str.endswith('.') is True:
         return format_float(num_str)
 
-    # For loop to determine value of positive hex values        
-    if pos_hex_num(num_str):
-        for digit in reversed(num_str):
-            if valid_hex_digit(digit):
-                # Get hex value from hex list
-                hex_val = valid_hex_num.index(digit)
-                if hex_val < 16:
-                    hex_to_int += valid_hex_num.index(digit) * 16 ** pwr
-                else:
-                    # Convert lowercase hex numbers to correct hex value
-                    hex_to_int += (hex_val - 6) * 16 ** pwr
-                pwr += 1
-            if digit == 'x':
-                continue
-            if not valid_hex_digit(digit):
-                return None
-        return hex_to_int
-
-    # For loop to determine value of negative hex values
+    # For loop to determine value of positive hex
+    for digit in reversed(num_str):
+        if valid_hex_digit(digit):
+            hex_to_int += convert_lower(digit) * 16 ** pwr
+            pwr += 1
+        if digit == 'x':
+            continue
+        if digit == '-':
+            continue
+        if not valid_hex_digit(digit):
+            return None
     if neg_hex_num(num_str):
-        for digit in reversed(num_str):
-            if valid_hex_digit(digit):
-                hex_val = valid_hex_num.index(digit)
-                if hex_val < 16:
-                    hex_to_int += valid_hex_num.index(digit) * 16 ** pwr
-                else:
-                    hex_to_int += (hex_val - 6) * 16 ** pwr
-                pwr += 1
-            if digit == 'x':
-                continue
-            if digit == '-':
-                continue
-            if not valid_hex_digit(digit):
-                return None
         return hex_to_int * -1
+    return hex_to_int
 
     if pos_hex_num(num_str) is False and neg_hex_num(num_str) is False:
         return num_str
@@ -105,10 +84,17 @@ def neg_hex_num(hex_str):
 
 # Helper function that adds a 0 before or after number that begins or ends with a period
 def format_float(hex_str):
-    if str.startswith('.'):
-        return '0' + str
-    elif str.endswith('.'):
-        return str + '0'
+    if hex_str.startswith('.'):
+        return '0' + hex_str
+    elif hex_str.endswith('.'):
+        return hex_str + '0'
+
+
+def convert_lower(hex_num):
+    hex_index = valid_hex_num.index(hex_num)
+    if hex_index > 15:
+        return hex_index - 6
+    return hex_index
 
 
 # ------------------------------------
