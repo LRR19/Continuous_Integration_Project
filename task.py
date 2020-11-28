@@ -12,7 +12,7 @@ epoc_day = 1
 
 def leap_yr(lp_year):
     """Helper func: Returns true if it's a leap year and False if it's not"""
-    return lp_year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)
+    return lp_year % 4 == 0 and (lp_year % 100 != 0 or lp_year % 400 == 0)
 
 
 def calc_year(secs) -> (int, float):
