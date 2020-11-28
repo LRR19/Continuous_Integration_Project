@@ -2,7 +2,7 @@ import unittest
 from task import leap_yr, my_datetime
 from task import conv_endian
 from task import count_period, valid_hex_digit, pos_hex_num
-from task import neg_hex_num, conv_num, format_float
+from task import neg_hex_num, conv_num, format_float, invalid_hex_string
 
 
 class TestCase(unittest.TestCase):
@@ -48,10 +48,13 @@ class TestCase(unittest.TestCase):
         self.assertTrue(neg_hex_num('-0xA'))
 
     def test_conv_num(self):
-        self.assertEqual(conv_num('-0x1a'), -26)
+        self.assertEqual(conv_num('0x1a'), 26)
 
     def test_format_float(self):
         self.assertEqual(format_float('.123'), '0.123')
+
+    def test_invalid_hex_string(self):
+        self.assertEqual(invalid_hex_string('12345A'), True)
 
 
 if __name__ == '__main__':

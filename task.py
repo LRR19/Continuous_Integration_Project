@@ -18,11 +18,10 @@ valid_hex_num = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
 def conv_num(num_str):
     hex_to_int = 0
     pwr = 0
-
-    # Returns none if empty string or there is more than 1 period
-    if count_period(num_str) > 1 or num_str == '':
+    if num_str.startswith('.') or num_str.endswith('.'):
+        return format_float(num_str)
+    if invalid_hex_string(num_str):
         return None
-
     # For loop to determine value of hex
     for digit in reversed(num_str):
         if valid_hex_digit(digit):
@@ -36,10 +35,26 @@ def conv_num(num_str):
         return hex_to_int * -1
     return hex_to_int
 
-    if pos_hex_num(num_str) is False and neg_hex_num(num_str) is False:
-        return format_float(num_str)
 
-    return None
+# Helper function to validate hex string
+def invalid_hex_string(hex_str):
+    if count_period(hex_str) > 1 or hex_str == '':
+        return True
+    if pos_hex_num(hex_str) is False and neg_hex_num(hex_str) is False:
+        for digit in hex_str:
+            hex_index = valid_hex_num.index(digit)
+            if hex_index > 0:
+                return True
+    count_x = 0
+    count_neg = 0
+    for digit in hex_str:
+        if digit == 'x':
+            count_x += 1
+        if digit == '-':
+            count_neg += 1
+    if count_x > 1 or count_neg > 1:
+        return True
+    return False
 
 
 # Helper function that returns the number of periods in given string
@@ -48,7 +63,6 @@ def count_period(hex_str):
     for char in hex_str:
         if char == '.':
             count += 1
-
     return count
 
 
@@ -79,8 +93,10 @@ def format_float(hex_str):
         return '0' + hex_str
     elif hex_str.endswith('.'):
         return hex_str + '0'
+    return hex_str
 
 
+# Helper function that onverts lowercase hex digit to correct value
 def convert_lower(hex_num):
     hex_index = valid_hex_num.index(hex_num)
     if hex_index > 15:
