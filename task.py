@@ -61,6 +61,9 @@ def remain_secs_in_current_year(secs) -> int:
 
     rem = secs - (((reg_month_years * 365) + (leap_month_years * 366)) *
                   day)
+    if rem < 0:
+        rem = abs(rem)
+
     return rem
 
 
@@ -72,22 +75,31 @@ def calc_day(secs) -> int:
         counter = 0
         while counter <= m:
             num_days = LEAP_MONTH_DAYS[counter]
-            t_secs = num_days * day
-            if rem_secs - t_secs < 0:
+            total_sec_in_month = num_days * day
+            if rem_secs - total_sec_in_month < 0:
                 return math.floor(rem_secs / day)
             else:
-                rem_secs -= t_secs
+                rem_secs -= total_sec_in_month
                 counter += 1
     else:
         counter = 0
         while counter <= m:
             num_days = REG_MONTH_DAYS[counter]
-            t_secs = num_days * day
-            if rem_secs - t_secs < 0:
+            total_sec_in_month = num_days * day
+            if rem_secs - total_sec_in_month < 0:
                 return math.floor(rem_secs / day)
             else:
-                rem_secs -= t_secs
+                rem_secs -= total_sec_in_month
                 counter += 1
+
+    # rem_secs /= day
+    # if 0 < rem_secs < 1:
+    #     rem_secs = 1
+    # else:
+    #     rem_secs = math.floor(rem_secs)
+    #
+    # return rem_secs
+
 
 
 def my_datetime(num_sec):
