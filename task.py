@@ -42,7 +42,7 @@ def calc_month(secs) -> int:
     y = calc_year(secs)
     rem_secs = remain_secs_in_current_year(secs)
     m = 0
-    if leap_yr(epoc_year + y):
+    if leap_yr(y + epoc_year):
         for v in LEAP_MONTH_DAYS:
             sec_in_month = v * day
             if rem_secs - sec_in_month < 0:
@@ -66,7 +66,7 @@ def remain_secs_in_current_year(secs) -> int:
     leap_month_years = 0
     reg_month_years = 0
     while i > 0:
-        if leap_yr(epoc_year + i):
+        if leap_yr(i + epoc_year):
             leap_month_years += 1
         else:
             reg_month_years += 1
@@ -84,7 +84,7 @@ def calc_day(secs) -> int:
     """Converts seconds to a day"""
     m = calc_month(secs)
     rem_secs = remain_secs_in_current_year(secs)
-    if leap_yr(calc_year(secs)):
+    if leap_yr(calc_year(secs) + epoc_year):
         counter = 0
         while counter <= m:
             num_days = LEAP_MONTH_DAYS[counter]
