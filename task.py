@@ -101,6 +101,7 @@ def calc_day(secs) -> int:
 
 
 def calc_day_leap(m, rem_secs) -> int:
+    """Converts seconds to a day for a leap year"""
     counter = 0
     internal_counter = 0
     while counter <= m:
@@ -128,6 +129,7 @@ def calc_day_leap(m, rem_secs) -> int:
 
 
 def calc_day_comm(m, rem_secs) -> int:
+    """Converts seconds to a day for a regular year"""
     counter = 0
     internal_counter = 0
     while counter <= m:
