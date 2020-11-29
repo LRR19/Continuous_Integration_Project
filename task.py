@@ -9,7 +9,103 @@ epoc_year = 1970
 epoc_month = 1
 epoc_day = 1
 
+valid_hex_num = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+                 'A', 'B', 'C', 'D', 'E', 'F', 'a', 'b', 'c', 'd', 'e', 'f']
 
+
+# PART 1: Convert Hex to Decimal
+def conv_num(num_str):
+    hex_to_int = 0
+    pwr = 0
+    if invalid_hex_string(num_str):
+        return None
+    if num_str.startswith('.') or num_str.endswith('.'):
+        return format_float(num_str)
+    if pos_hex_num(num_str) is False and neg_hex_num(num_str) is False:
+        return num_str
+    # For loop to determine value of hex
+    for digit in reversed(num_str):
+        if valid_hex_digit(digit):
+            hex_to_int += convert_lower(digit) * 16 ** pwr
+            pwr += 1
+        if digit == 'x' or digit == '-':
+            continue
+        if not valid_hex_digit(digit):
+            return None
+    if neg_hex_num(num_str):
+        return hex_to_int * -1
+    return hex_to_int
+
+
+# Helper function to validate hex string
+def invalid_hex_string(hex_str):
+    if count_period(hex_str) > 1 or hex_str == '':
+        return True
+    if pos_hex_num(hex_str) is False and neg_hex_num(hex_str) is False:
+        for hex_digit in hex_str:
+            if valid_hex_digit(hex_digit):
+                if valid_hex_num.index(hex_digit) > 9:
+                    return True
+    count_x = 0
+    count_neg = 0
+    for digit in hex_str:
+        if digit == 'x':
+            count_x += 1
+        if digit == '-':
+            count_neg += 1
+    if count_x > 1 or count_neg > 1:
+        return True
+    return False
+
+
+# Helper function that returns the number of periods in given string
+def count_period(hex_str):
+    count = 0
+    for char in hex_str:
+        if char == '.':
+            count += 1
+    return count
+
+
+# Helper function that checks for valid hex number
+def valid_hex_digit(hex_digit):
+    if hex_digit in valid_hex_num:
+        return True
+    return False
+
+
+# Helper function that returns true if hex value is positive
+def pos_hex_num(hex_str):
+    if hex_str.startswith('0x'):
+        return True
+    return False
+
+
+# Helper function returns true if negative hex value
+def neg_hex_num(hex_str):
+    if hex_str.startswith('-0x'):
+        return True
+    return False
+
+
+# Helper function that inserts missing 0 next to period
+def format_float(hex_str):
+    if hex_str.startswith('.'):
+        return '0' + hex_str
+    elif hex_str.endswith('.'):
+        return hex_str + '0'
+    return hex_str
+
+
+# Helper function that converts lowercase hex digit to correct value
+def convert_lower(hex_num):
+    hex_index = valid_hex_num.index(hex_num)
+    if hex_index > 15:
+        return hex_index - 6
+    return hex_index
+
+
+# PART 2: Datetime
 def leap_yr(lp_year):
     """Helper func: Returns true if it's a leap year and False if it's not"""
     return lp_year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)
@@ -119,4 +215,3 @@ def conv_endian(num, endian='big'):
         return "-" + to_hex
     else:
         return to_hex
-
