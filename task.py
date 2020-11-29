@@ -17,10 +17,10 @@ valid_hex_num = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
 def conv_num(num_str):
     hex_to_int = 0
     pwr = 0
-    if num_str.startswith('.') or num_str.endswith('.'):
-        return format_float(num_str)
     if invalid_hex_string(num_str):
         return None
+    if num_str.startswith('.') or num_str.endswith('.'):
+        return format_float(num_str)
     if pos_hex_num(num_str) is False and neg_hex_num(num_str) is False:
         return num_str
     # For loop to determine value of hex
