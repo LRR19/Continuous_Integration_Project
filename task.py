@@ -13,8 +13,7 @@ valid_hex_num = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
                  'A', 'B', 'C', 'D', 'E', 'F', 'a', 'b', 'c', 'd', 'e', 'f']
 
 
-# Part 1
-# Convert Hex to Decimal
+# PART 1: Convert Hex to Decimal
 def conv_num(num_str):
     hex_to_int = 0
     pwr = 0
@@ -22,6 +21,8 @@ def conv_num(num_str):
         return format_float(num_str)
     if invalid_hex_string(num_str):
         return None
+    if pos_hex_num(num_str) is False and neg_hex_num(num_str) is False:
+        return num_str
     # For loop to determine value of hex
     for digit in reversed(num_str):
         if valid_hex_digit(digit):
@@ -31,8 +32,6 @@ def conv_num(num_str):
             continue
         if not valid_hex_digit(digit):
             return None
-    if pos_hex_num(num_str) is False and neg_hex_num(num_str) is False:
-        return num_str
     if neg_hex_num(num_str):
         return hex_to_int * -1
     return hex_to_int
@@ -98,7 +97,7 @@ def format_float(hex_str):
     return hex_str
 
 
-# Helper function that onverts lowercase hex digit to correct value
+# Helper function that converts lowercase hex digit to correct value
 def convert_lower(hex_num):
     hex_index = valid_hex_num.index(hex_num)
     if hex_index > 15:
@@ -106,9 +105,7 @@ def convert_lower(hex_num):
     return hex_index
 
 
-# ------------------------------------
-
-
+# PART 2: Datetime
 def leap_yr(lp_year):
     """Helper func: Returns true if it's a leap year and False if it's not"""
     return lp_year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)

@@ -39,7 +39,7 @@ class TestCase(unittest.TestCase):
         self.assertEqual(count_period('abc....def'), 4)
 
     def test_valid_hex_digit(self):
-        self.assertTrue(valid_hex_digit('1'))
+        self.assertTrue(valid_hex_digit('a'))
 
     def test_pos_hex_num(self):
         self.assertTrue(pos_hex_num('0xA'))
