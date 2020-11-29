@@ -1,5 +1,4 @@
 import math
-from datetime import datetime
 
 year = 31556926
 month = year / 12
@@ -16,7 +15,7 @@ def leap_yr(lp_year):
     return lp_year % 4 == 0 and (lp_year % 100 != 0 or lp_year % 400 == 0)
 
 
-def calc_year2(secs) -> int:
+def calc_year(secs) -> int:
     """Converts seconds to a year"""
     current_year_in_sec = 0
     while True:
@@ -38,21 +37,9 @@ def calc_year2(secs) -> int:
     return math.floor(current_year_in_sec / year)
 
 
-def calc_year(secs) -> int:
-    """Converts seconds to a year"""
-    current_year_in_sec = 0
-    while True:
-        if current_year_in_sec + year <= secs:
-            current_year_in_sec += year
-        else:
-            break
-
-    return math.floor(current_year_in_sec / year)
-
-
 def calc_month(secs) -> int:
     """Converts seconds to a month"""
-    y = calc_year2(secs)
+    y = calc_year(secs)
     rem_secs = remain_secs_in_current_year(secs)
     calculated_month = 0
     if leap_yr(y + epoc_year):
@@ -85,7 +72,7 @@ def calc_month(secs) -> int:
 
 
 def remain_secs_in_current_year(secs) -> int:
-    i = calc_year2(secs)
+    i = calc_year(secs)
     leap_month_years = 0
     reg_month_years = 0
     while i > 0:
@@ -107,7 +94,7 @@ def calc_day(secs) -> int:
     """Converts seconds to a day"""
     m = calc_month(secs)
     rem_secs = remain_secs_in_current_year(secs)
-    if leap_yr(calc_year2(secs) + epoc_year):
+    if leap_yr(calc_year(secs) + epoc_year):
         counter = 0
         internal_counter = 0
         while counter <= m:
@@ -152,7 +139,7 @@ def calc_day(secs) -> int:
 
 
 def my_datetime(num_sec):
-    get_calc_year = calc_year2(num_sec)
+    get_calc_year = calc_year(num_sec)
     get_calc_month = calc_month(num_sec)
     get_calc_day = calc_day(num_sec)
     # Handles case when 12/32/2000 to be 01/nn/2001
@@ -170,52 +157,3 @@ def my_datetime(num_sec):
     current_year = epoc_year + get_calc_year
     return str(current_month).zfill(2) + '-' + str(current_day).zfill(
         2) + '-' + str(current_year)
-
-
-if __name__ == "__main__":
-    # print(f"My day: {my_datetime(131634486250)}")
-    # print(datetime.utcfromtimestamp(131634486250).strftime('%m-%d-%Y'))
-    #
-    #
-    # print(f"My day: {my_datetime(54351580109)}")
-    # print(datetime.utcfromtimestamp(54351580109).strftime('%m-%d-%Y'))
-    # print(f"My day: {my_datetime(109904972918)}")
-    # print(datetime.utcfromtimestamp(109904972918).strftime('%m-%d-%Y'))
-    #
-    # print(f"My day: {my_datetime(14642439067)}")
-    # print(datetime.utcfromtimestamp(14642439067).strftime('%m-%d-%Y'))
-    # print(f"My day: {my_datetime(15557568132)}")
-    # print(datetime.utcfromtimestamp(15557568132).strftime('%m-%d-%Y'))
-    # print(f"My day: {my_datetime(136925670091)}")
-    # print(datetime.utcfromtimestamp(136925670091).strftime('%m-%d-%Y'))
-    #
-    #
-    # print(f"My day: {my_datetime(21521869118)}")
-    # print(datetime.utcfromtimestamp(21521869118).strftime('%m-%d-%Y'))
-    # print(f"My day: {my_datetime(138884725212)}")
-    # print(datetime.utcfromtimestamp(138884725212).strftime('%m-%d-%Y'))
-    # print(f"My day: {my_datetime(171519770657)}")
-    # print(datetime.utcfromtimestamp(171519770657).strftime('%m-%d-%Y'))
-    # print(f"My day: {my_datetime(114817389093)}")
-    # print(datetime.utcfromtimestamp(114817389093).strftime('%m-%d-%Y'))
-    # print(f"My day: {my_datetime(163943502679)}")
-    # print(datetime.utcfromtimestamp(163943502679).strftime('%m-%d-%Y'))
-    # print(f"My day: {my_datetime(148287045670)}")
-    # print(datetime.utcfromtimestamp(148287045670).strftime('%m-%d-%Y'))
-    print(f"My day: {my_datetime(233716089025)}")
-    print(datetime.utcfromtimestamp(233716089025).strftime('%m-%d-%Y'))
-    # print(f"My: {my_datetime(234951368048)}")
-    # print(datetime.utcfromtimestamp(234951368048).strftime('%m-%d-%Y'))
-    # print(f"My: {my_datetime(123176718521)}")
-    # print(datetime.utcfromtimestamp(123176718521).strftime('%m-%d-%Y'))
-    #
-    #
-    # # leap year 2188
-    # print(f"My day: {my_datetime(6884312400)}")
-    # print(datetime.utcfromtimestamp(6884312400).strftime('%m-%d-%Y'))
-    #
-    # # 03-01-2100
-    # print(f"My day: {my_datetime(4107567600)}")
-    # print(datetime.utcfromtimestamp(4107567600).strftime('%m-%d-%Y'))
-    # print(f"My day: {my_datetime(4107481200)}")
-    # print(datetime.utcfromtimestamp(4107481200).strftime('%m-%d-%Y'))
