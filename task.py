@@ -241,6 +241,7 @@ def calc_day_comm(m, rem_secs) -> int:
             counter += 1
             internal_counter += 1
 
+
 def my_datetime(num_sec):
     get_calc_year = calc_year(num_sec)
     get_calc_month = calc_month(num_sec)
