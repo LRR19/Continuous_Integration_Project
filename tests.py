@@ -1,9 +1,8 @@
 import unittest
 from datetime import datetime
-from task import leap_yr, my_datetime
-from task import conv_endian
-from task import count_period, valid_hex_digit, pos_hex_num
-from task import neg_hex_num, conv_num, format_float, invalid_hex_string
+from task import leap_yr, my_datetime, conv_endian, count_period, \
+    valid_hex_digit, pos_hex_num, neg_hex_num, conv_num, format_float, \
+    invalid_hex_string
 
 
 class TestCase(unittest.TestCase):
@@ -64,7 +63,7 @@ class TestCase(unittest.TestCase):
             datetime.utcfromtimestamp(7289738124).strftime('%m-%d-%Y'),
             my_datetime(7289738124))
 
-    # 11-30-2007
+    # 11-30-2007. random day
     def test9(self):
         self.assertEqual(
             datetime.utcfromtimestamp(1196402400).strftime('%m-%d-%Y'),
@@ -103,7 +102,7 @@ class TestCase(unittest.TestCase):
         self.assertEqual(datetime.utcfromtimestamp(1583042400).strftime(
             '%m-%d-%Y'), my_datetime(1583042400))
 
-    # Unit Tests for Function 3
+    """Unit tests for function 3 - def int_to_hex(num)"""
     def test_big(self):
         self.assertEqual(conv_endian(954786), "0E 91 A2")
 
@@ -119,7 +118,7 @@ class TestCase(unittest.TestCase):
     def test_bad_endian(self):
         self.assertEqual(conv_endian(-954786, 'bad'), None)
 
-    # Unit tests for Function 1
+    """Unit tests for function 1 - def conv_num(num_str)"""
     def test_count_period(self):
         self.assertEqual(count_period('abc....def'), 4)
 
