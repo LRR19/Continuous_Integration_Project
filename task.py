@@ -95,48 +95,53 @@ def calc_day(secs) -> int:
     m = calc_month(secs)
     rem_secs = remain_secs_in_current_year(secs)
     if leap_yr(calc_year(secs) + epoc_year):
-        counter = 0
-        internal_counter = 0
-        while counter <= m:
-            if counter > 11 and internal_counter > 11:
-                internal_counter = 0
-            num_days = LEAP_MONTH_DAYS[internal_counter]
-            total_sec_in_month = num_days * day
-            if math.ceil((total_sec_in_month - rem_secs) / day) == \
-                    LEAP_MONTH_DAYS[internal_counter] - 1:
-                return 0
-            elif math.ceil((total_sec_in_month - rem_secs) / day) >= \
-                    LEAP_MONTH_DAYS[internal_counter]:
-                return 0
-            elif math.ceil((total_sec_in_month - rem_secs) / day) == 1:
-                return 0
-            elif rem_secs - total_sec_in_month < 0:
-                if counter > 11:
-                    return math.ceil(rem_secs / day) + 1
-                else:
-                    return math.floor(rem_secs / day) + 1
-            else:
-                rem_secs -= total_sec_in_month
-                counter += 1
-                internal_counter += 1
+        return calc_day_leap(m, rem_secs)
     else:
-        counter = 0
-        internal_counter = 0
-        while counter <= m:
-            if counter > 11 and internal_counter > 11:
-                internal_counter = 0
-            num_days = REG_MONTH_DAYS[internal_counter]
-            total_sec_in_month = num_days * day
-            if rem_secs - total_sec_in_month < 0:
-                return REG_MONTH_DAYS[internal_counter] - \
-                       math.ceil((total_sec_in_month - rem_secs) / day)
+        return calc_day_comm(m, rem_secs)
+
+
+def calc_day_leap(m, rem_secs) -> int:
+    counter = 0
+    internal_counter = 0
+    while counter <= m:
+        if counter > 11 and internal_counter > 11:
+            internal_counter = 0
+        num_days = LEAP_MONTH_DAYS[internal_counter]
+        total_sec_in_month = num_days * day
+        if math.ceil((total_sec_in_month - rem_secs) / day) == \
+                LEAP_MONTH_DAYS[internal_counter] - 1:
+            return 0
+        elif math.ceil((total_sec_in_month - rem_secs) / day) >= \
+                LEAP_MONTH_DAYS[internal_counter]:
+            return 0
+        elif math.ceil((total_sec_in_month - rem_secs) / day) == 1:
+            return 0
+        elif rem_secs - total_sec_in_month < 0:
+            if counter > 11:
+                return math.ceil(rem_secs / day) + 1
             else:
-                rem_secs -= total_sec_in_month
-                counter += 1
-                internal_counter += 1
+                return math.floor(rem_secs / day) + 1
+        else:
+            rem_secs -= total_sec_in_month
+            counter += 1
+            internal_counter += 1
 
-    return math.floor(rem_secs / day)
 
+def calc_day_comm(m, rem_secs) -> int:
+    counter = 0
+    internal_counter = 0
+    while counter <= m:
+        if counter > 11 and internal_counter > 11:
+            internal_counter = 0
+        num_days = REG_MONTH_DAYS[internal_counter]
+        total_sec_in_month = num_days * day
+        if rem_secs - total_sec_in_month < 0:
+            return REG_MONTH_DAYS[internal_counter] - \
+                   math.ceil((total_sec_in_month - rem_secs) / day)
+        else:
+            rem_secs -= total_sec_in_month
+            counter += 1
+            internal_counter += 1
 
 def my_datetime(num_sec):
     get_calc_year = calc_year(num_sec)
