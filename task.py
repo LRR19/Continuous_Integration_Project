@@ -112,7 +112,7 @@ def leap_yr(lp_year):
 
 
 def calc_year(secs) -> int:
-    """Converts seconds to a year"""
+    """Helper func: Converts seconds to a year"""
     current_year_in_sec = 0
     while True:
         if leap_yr(math.floor(current_year_in_sec / year) + epoc_year):
@@ -134,7 +134,7 @@ def calc_year(secs) -> int:
 
 
 def calc_month(secs) -> int:
-    """Converts seconds to a month"""
+    """Helper func: Converts seconds to a month"""
     y = calc_year(secs)
     rem_secs = remain_secs_in_current_year(secs)
     calculated_month = 0
@@ -187,7 +187,7 @@ def remain_secs_in_current_year(secs) -> int:
 
 
 def calc_day(secs) -> int:
-    """Converts seconds to a day"""
+    """Helper func: Converts seconds to a day"""
     m = calc_month(secs)
     rem_secs = remain_secs_in_current_year(secs)
     if leap_yr(calc_year(secs) + epoc_year):
@@ -197,7 +197,7 @@ def calc_day(secs) -> int:
 
 
 def calc_day_leap(m, rem_secs) -> int:
-    """Converts seconds to a day for a leap year"""
+    """Helper func: Converts seconds to a day for a leap year"""
     counter = 0
     internal_counter = 0
     while counter <= m:
@@ -225,7 +225,7 @@ def calc_day_leap(m, rem_secs) -> int:
 
 
 def calc_day_comm(m, rem_secs) -> int:
-    """Converts seconds to a day for a regular year"""
+    """Helper func: Converts seconds to a day for a regular year"""
     counter = 0
     internal_counter = 0
     while counter <= m:
