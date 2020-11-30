@@ -112,7 +112,7 @@ def leap_yr(lp_year):
 
 
 def calc_year(secs) -> int:
-    """Helper func: Converts seconds to a YEAR"""
+    """Helper func: Calculates the YEAR given the seconds"""
     current_year_in_sec = 0
     while True:
         if leap_yr(math.floor(current_year_in_sec / YEAR) + EPOCH_YEAR):
@@ -134,10 +134,14 @@ def calc_year(secs) -> int:
 
 
 def calc_month(secs) -> int:
-    """Helper func: Converts seconds to a MONTH"""
+    """Helper func: Calculates MONTH of the year given the remaining seconds"""
     y = calc_year(secs)
     rem_secs = remain_secs_in_current_year(secs)
     calculated_month = 0
+    # if a leap year, iterate through the list of LEAP_MONTHS_DAYS to
+    # calculate the days in a month. If there is an overflow of days
+    # within a month, it means you go to the next month. If it's not a leap
+    # year then repeat same process using REG_MONTHS_DAYS.
     if leap_yr(y + EPOCH_YEAR):
         month_itr = 0
         while True:
@@ -168,10 +172,12 @@ def calc_month(secs) -> int:
 
 
 def remain_secs_in_current_year(secs) -> int:
-    """Helper func: remaining seconds used to determine the MONTH"""
+    """Helper func: Calculates the remaining seconds from given year"""
     i = calc_year(secs)
     leap_month_years = 0
     reg_month_years = 0
+    # Calculates the remaining seconds(seconds that are left over after the
+    # year has been calculated) for a leap and regular year.
     while i > 0:
         if leap_yr(i + EPOCH_YEAR):
             leap_month_years += 1
@@ -188,7 +194,8 @@ def remain_secs_in_current_year(secs) -> int:
 
 
 def calc_day(secs) -> int:
-    """Helper func: Converts seconds to a DAY"""
+    """Helper func: Calculates the day given the MONTH for a leap and
+       regular year"""
     m = calc_month(secs)
     rem_secs = remain_secs_in_current_year(secs)
     if leap_yr(calc_year(secs) + EPOCH_YEAR):
@@ -198,7 +205,7 @@ def calc_day(secs) -> int:
 
 
 def calc_day_leap(m, rem_secs) -> int:
-    """Helper func: Converts seconds to a DAY for a leap YEAR"""
+    """Helper func: Determines the DAY of the MONTH in a leap year"""
     counter = 0
     internal_counter = 0
     while counter <= m:
@@ -226,7 +233,7 @@ def calc_day_leap(m, rem_secs) -> int:
 
 
 def calc_day_comm(m, rem_secs) -> int:
-    """Helper func: Converts seconds to a DAY for a regular YEAR"""
+    """Helper func: Determines the DAY of the MONTH in a regular year"""
     counter = 0
     internal_counter = 0
     while counter <= m:
@@ -249,6 +256,7 @@ def my_datetime(num_sec):
     get_calc_year = calc_year(num_sec)
     get_calc_month = calc_month(num_sec)
     get_calc_day = calc_day(num_sec)
+
     # Handles case when 12/32/2000 to be 01/nn/2001
     if get_calc_month + EPOCH_MONTH == 12:
         if get_calc_day + EPOCH_DAY > REG_MONTH_DAYS[11]:
@@ -262,6 +270,7 @@ def my_datetime(num_sec):
     current_month = EPOCH_MONTH + get_calc_month
     current_day = EPOCH_DAY + get_calc_day
     current_year = EPOCH_YEAR + get_calc_year
+
     return str(current_month).zfill(2) + '-' + str(current_day).zfill(
         2) + '-' + str(current_year)
 
