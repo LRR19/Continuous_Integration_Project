@@ -132,7 +132,7 @@ class TestCase(unittest.TestCase):
         self.assertTrue(neg_hex_num('-0xA'))
 
     def test_conv_num(self):
-        self.assertEqual(conv_num('0x1a'), 26)
+        self.assertEqual(conv_num('0x1A'), 26)
 
     def test_format_float(self):
         self.assertEqual(format_float('.123'), '0.123')
