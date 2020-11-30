@@ -1,4 +1,5 @@
 import unittest
+import random
 from datetime import datetime
 from task import leap_yr, my_datetime, conv_endian, count_period, \
     valid_hex_digit, pos_hex_num, neg_hex_num, conv_num, format_float, \
