@@ -102,6 +102,7 @@ class TestCase(unittest.TestCase):
         self.assertEqual(datetime.utcfromtimestamp(1583042400).strftime(
             '%m-%d-%Y'), my_datetime(1583042400))
 
+
     """Unit tests for function 3 - def int_to_hex(num)"""
     def test_big(self):
         self.assertEqual(conv_endian(954786), "0E 91 A2")
@@ -127,7 +128,7 @@ class TestCase(unittest.TestCase):
             j = iter(formatted)
             formatted = ' '.join(i + k for i, k in zip(j, j)).upper()
             self.assertEqual(conv_endian(random_int, 'big'), formatted)
-
+            
     def test_random_little(self):
         for x in range(0, 1000):
             random_int = random.randint(0, 999999)
@@ -143,7 +144,7 @@ class TestCase(unittest.TestCase):
             little_formatted = ' '.join(format(x, '02x') for x in t).upper()
             self.assertEqual(conv_endian(random_int, 'little'), little_formatted)
 
-
+            
     """Unit tests for function 1 - def conv_num(num_str)"""
     def test_count_period(self):
         self.assertEqual(count_period('abc....def'), 4)
@@ -165,6 +166,7 @@ class TestCase(unittest.TestCase):
 
     def test_invalid_hex_string(self):
         self.assertEqual(invalid_hex_string('12345A'), True)
+        
 
 if __name__ == '__main__':
     unittest.main()
