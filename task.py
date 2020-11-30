@@ -168,6 +168,7 @@ def calc_month(secs) -> int:
 
 
 def remain_secs_in_current_year(secs) -> int:
+    """Helper func: remaining seconds used to determine the month"""
     i = calc_year(secs)
     leap_month_years = 0
     reg_month_years = 0
@@ -243,6 +244,8 @@ def calc_day_comm(m, rem_secs) -> int:
 
 
 def my_datetime(num_sec):
+    """ Main function that utilizes above helpers to convert seconds in
+    MM-DD-YYYY"""
     get_calc_year = calc_year(num_sec)
     get_calc_month = calc_month(num_sec)
     get_calc_day = calc_day(num_sec)
