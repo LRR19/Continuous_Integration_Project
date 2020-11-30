@@ -32,9 +32,11 @@ def conv_num(num_str):
             continue
         if not valid_hex_digit(digit):
             return None
+    if pos_hex_num(num_str):
+        return hex_to_int
     if neg_hex_num(num_str):
         return hex_to_int * -1
-    return hex_to_int
+    return None
 
 
 # Helper function to validate hex string
@@ -76,6 +78,9 @@ def valid_hex_digit(hex_digit):
 
 # Helper function that returns true if hex value is positive
 def pos_hex_num(hex_str):
+    for digit in hex_str:
+        if digit == '-':
+            return False
     if hex_str.startswith('0x'):
         return True
     return False
