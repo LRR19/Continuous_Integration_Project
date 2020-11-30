@@ -1,4 +1,5 @@
 import unittest
+import random
 from datetime import datetime
 from task import leap_yr, my_datetime, conv_endian, count_period, \
     valid_hex_digit, pos_hex_num, neg_hex_num, conv_num, format_float, \
@@ -117,6 +118,31 @@ class TestCase(unittest.TestCase):
 
     def test_bad_endian(self):
         self.assertEqual(conv_endian(-954786, 'bad'), None)
+
+    def test_random_big(self):
+        for x in range(0, 1000):
+            random_int = random.randint(0, 999999)
+            formatted = hex(random_int)[2:]
+            if len(formatted) % 2 == 1:
+                formatted = "0" + formatted
+            j = iter(formatted)
+            formatted = ' '.join(i + k for i, k in zip(j, j)).upper()
+            self.assertEqual(conv_endian(random_int, 'big'), formatted)
+
+    def test_random_little(self):
+        for x in range(0, 1000):
+            random_int = random.randint(0, 999999)
+            formatted = hex(random_int)[2:]
+            if len(formatted) % 2 == 1:
+                formatted = "0" + formatted
+            j = iter(formatted)
+            formatted = ' '.join(i + k for i, k in zip(j, j))
+
+            # little endian source https://www.xspdf.com/resolution/52873369.html
+            t = bytearray.fromhex(formatted)
+            t.reverse()
+            little_formatted = ' '.join(format(x, '02x') for x in t).upper()
+            self.assertEqual(conv_endian(random_int, 'little'), little_formatted)
 
     """Unit tests for function 1 - def conv_num(num_str)"""
     def test_count_period(self):
