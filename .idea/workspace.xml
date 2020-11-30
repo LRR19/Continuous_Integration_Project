@@ -18,7 +18,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
   </component>
-  <component name="RunManager" selected="Python tests.Unittests for tests.TestCase">
+  <component name="RunManager" selected="Python tests.Unittests in tests.py">
     <configuration name="Unittests for tests.TestCase" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="Continuous_Integration_Project" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -30,20 +30,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;tests.TestCase&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Unittests for tests.TestCase.test_little_negative" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
-      <module name="Continuous_Integration_Project" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;tests.TestCase.test_little_negative&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
@@ -61,7 +47,7 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Unittests for tests.TestCase.test_valid_hex_digit" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Unittests for tests.TestCase.test_random_big" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="Continuous_Integration_Project" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -71,7 +57,21 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;tests.TestCase.test_valid_hex_digit&quot;" />
+      <option name="_new_target" value="&quot;tests.TestCase.test_random_big&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests for tests.TestCase.test_random_little" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="Continuous_Integration_Project" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;tests.TestCase.test_random_little&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
@@ -91,11 +91,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.Unittests for tests.TestCase" />
         <item itemvalue="Python tests.Unittests in tests.py" />
+        <item itemvalue="Python tests.Unittests for tests.TestCase.test_random_little" />
+        <item itemvalue="Python tests.Unittests for tests.TestCase.test_random_big" />
+        <item itemvalue="Python tests.Unittests for tests.TestCase" />
         <item itemvalue="Python tests.Unittests for tests.TestCase.test_pos_hex_num" />
-        <item itemvalue="Python tests.Unittests for tests.TestCase.test_little_negative" />
-        <item itemvalue="Python tests.Unittests for tests.TestCase.test_valid_hex_digit" />
       </list>
     </recent_temporary>
   </component>
@@ -111,25 +111,25 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1437" height="398" key="GridCell.Tab.0.bottom" timestamp="1606710951916">
+    <state width="1437" height="398" key="GridCell.Tab.0.bottom" timestamp="1606711928479">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1437" height="398" key="GridCell.Tab.0.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1606710951916" />
+    <state width="1437" height="398" key="GridCell.Tab.0.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1606711928479" />
     <state width="1437" height="398" key="GridCell.Tab.0.bottom/2560.0.2560.1400/0.0.2560.1400@0.0.2560.1400" timestamp="1606281020801" />
-    <state width="1437" height="398" key="GridCell.Tab.0.center" timestamp="1606710951916">
+    <state width="1437" height="398" key="GridCell.Tab.0.center" timestamp="1606711928479">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1437" height="398" key="GridCell.Tab.0.center/0.0.2560.1400@0.0.2560.1400" timestamp="1606710951916" />
+    <state width="1437" height="398" key="GridCell.Tab.0.center/0.0.2560.1400@0.0.2560.1400" timestamp="1606711928479" />
     <state width="1437" height="398" key="GridCell.Tab.0.center/2560.0.2560.1400/0.0.2560.1400@0.0.2560.1400" timestamp="1606281020801" />
-    <state width="1437" height="398" key="GridCell.Tab.0.left" timestamp="1606710951916">
+    <state width="1437" height="398" key="GridCell.Tab.0.left" timestamp="1606711928478">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1437" height="398" key="GridCell.Tab.0.left/0.0.2560.1400@0.0.2560.1400" timestamp="1606710951916" />
+    <state width="1437" height="398" key="GridCell.Tab.0.left/0.0.2560.1400@0.0.2560.1400" timestamp="1606711928478" />
     <state width="1437" height="398" key="GridCell.Tab.0.left/2560.0.2560.1400/0.0.2560.1400@0.0.2560.1400" timestamp="1606281020801" />
-    <state width="1437" height="398" key="GridCell.Tab.0.right" timestamp="1606710951916">
+    <state width="1437" height="398" key="GridCell.Tab.0.right" timestamp="1606711928479">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1437" height="398" key="GridCell.Tab.0.right/0.0.2560.1400@0.0.2560.1400" timestamp="1606710951916" />
+    <state width="1437" height="398" key="GridCell.Tab.0.right/0.0.2560.1400@0.0.2560.1400" timestamp="1606711928479" />
     <state width="1437" height="398" key="GridCell.Tab.0.right/2560.0.2560.1400/0.0.2560.1400@0.0.2560.1400" timestamp="1606281020801" />
   </component>
 </project>

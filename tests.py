@@ -33,17 +33,17 @@ class TestCase(unittest.TestCase):
     def test_bad_endian(self):
         self.assertEqual(conv_endian(-954786, 'bad'), None)
 
-    def random_big(self):
+    def test_random_big(self):
         for x in range(0, 1000):
             random_int = random.randint(0, 999999)
             formatted = hex(random_int)[2:]
             if len(formatted)%2 == 1:
                 formatted = "0" + formatted
             j = iter(formatted)
-            formatted = ' '.join(i + k for i, k in zip(j, j))
+            formatted = ' '.join(i + k for i, k in zip(j, j)).upper()
             self.assertEqual(conv_endian(random_int, 'big'), formatted)
 
-    def random_little(self):
+    def test_random_little(self):
         for x in range(0, 1000):
             random_int = random.randint(0, 999999)
             formatted = hex(random_int)[2:]
