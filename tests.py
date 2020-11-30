@@ -103,7 +103,6 @@ class TestCase(unittest.TestCase):
         self.assertEqual(datetime.utcfromtimestamp(1583042400).strftime(
             '%m-%d-%Y'), my_datetime(1583042400))
 
-
     """Unit tests for function 3 - def int_to_hex(num)"""
     def test_big(self):
         self.assertEqual(conv_endian(954786), "0E 91 A2")
@@ -124,7 +123,7 @@ class TestCase(unittest.TestCase):
         for x in range(0, 1000):
             random_int = random.randint(0, 999999)
             formatted = hex(random_int)[2:]
-            if len(formatted)%2 == 1:
+            if len(formatted) % 2 == 1:
                 formatted = "0" + formatted
             j = iter(formatted)
             formatted = ' '.join(i + k for i, k in zip(j, j)).upper()
@@ -134,7 +133,7 @@ class TestCase(unittest.TestCase):
         for x in range(0, 1000):
             random_int = random.randint(0, 999999)
             formatted = hex(random_int)[2:]
-            if len(formatted)%2 == 1:
+            if len(formatted) % 2 == 1:
                 formatted = "0" + formatted
             j = iter(formatted)
             formatted = ' '.join(i + k for i, k in zip(j, j))
@@ -145,7 +144,6 @@ class TestCase(unittest.TestCase):
             little_formatted = ' '.join(format(x, '02x') for x in t).upper()
             self.assertEqual(conv_endian(random_int, 'little'), little_formatted)
 
-            
     """Unit tests for function 1 - def conv_num(num_str)"""
     def test_count_period(self):
         self.assertEqual(count_period('abc....def'), 4)
