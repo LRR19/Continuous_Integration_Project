@@ -1,11 +1,11 @@
 import math
 
-year = 31556926
-month = year / 12
-day = 86400
-epoc_year = 1970
-epoc_month = 1
-epoc_day = 1
+YEAR = 31556926
+MONTH = YEAR / 12
+DAY = 86400
+EPOCH_YEAR = 1970
+EPOCH_MONTH = 1
+EPOCH_DAY = 1
 LEAP_MONTH_DAYS = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 REG_MONTH_DAYS = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 
@@ -107,45 +107,45 @@ def convert_lower(hex_num):
 
 # PART 2: Datetime
 def leap_yr(lp_year):
-    """Helper func: Returns true if it's a leap year and False if it's not"""
+    """Helper func: Returns true if it's a leap YEAR and False if it's not"""
     return lp_year % 4 == 0 and (lp_year % 100 != 0 or lp_year % 400 == 0)
 
 
 def calc_year(secs) -> int:
-    """Helper func: Converts seconds to a year"""
+    """Helper func: Converts seconds to a YEAR"""
     current_year_in_sec = 0
     while True:
-        if leap_yr(math.floor(current_year_in_sec / year) + epoc_year):
-            # if adding another year with leap day doesn't overflow our
-            # given seconds then we can add a new year and day
-            if current_year_in_sec + year + day <= secs:
-                current_year_in_sec += year + day
+        if leap_yr(math.floor(current_year_in_sec / YEAR) + EPOCH_YEAR):
+            # if adding another YEAR with leap DAY doesn't overflow our
+            # given seconds then we can add a new YEAR and DAY
+            if current_year_in_sec + YEAR + DAY <= secs:
+                current_year_in_sec += YEAR + DAY
             else:
                 break
         else:
-            # if adding another year doesn't overflow our given seconds
-            # then we can add a new year
-            if current_year_in_sec + year <= secs:
-                current_year_in_sec += year
+            # if adding another YEAR doesn't overflow our given seconds
+            # then we can add a new YEAR
+            if current_year_in_sec + YEAR <= secs:
+                current_year_in_sec += YEAR
             else:
                 break
 
-    return math.floor(current_year_in_sec / year)
+    return math.floor(current_year_in_sec / YEAR)
 
 
 def calc_month(secs) -> int:
-    """Helper func: Converts seconds to a month"""
+    """Helper func: Converts seconds to a MONTH"""
     y = calc_year(secs)
     rem_secs = remain_secs_in_current_year(secs)
     calculated_month = 0
-    if leap_yr(y + epoc_year):
+    if leap_yr(y + EPOCH_YEAR):
         month_itr = 0
         while True:
             if month_itr > 11:
                 month_itr = 0
-            sec_in_month = LEAP_MONTH_DAYS[month_itr] * day
+            sec_in_month = LEAP_MONTH_DAYS[month_itr] * DAY
             if rem_secs - sec_in_month < 0:
-                if abs(rem_secs - sec_in_month) <= day:  # midnight 12:00am
+                if abs(rem_secs - sec_in_month) <= DAY:  # midnight 12:00am
                     calculated_month += 1
                 break
             else:
@@ -157,7 +157,7 @@ def calc_month(secs) -> int:
         while True:
             if month_itr > 11:
                 month_itr = 0
-            sec_in_month = REG_MONTH_DAYS[month_itr] * day
+            sec_in_month = REG_MONTH_DAYS[month_itr] * DAY
             if rem_secs - sec_in_month < 0:
                 break
             else:
@@ -168,19 +168,19 @@ def calc_month(secs) -> int:
 
 
 def remain_secs_in_current_year(secs) -> int:
-    """Helper func: remaining seconds used to determine the month"""
+    """Helper func: remaining seconds used to determine the MONTH"""
     i = calc_year(secs)
     leap_month_years = 0
     reg_month_years = 0
     while i > 0:
-        if leap_yr(i + epoc_year):
+        if leap_yr(i + EPOCH_YEAR):
             leap_month_years += 1
         else:
             reg_month_years += 1
         i -= 1
 
     rem = secs - (((reg_month_years * 365) + (leap_month_years * 366)) *
-                  day)
+                  DAY)
     if rem < 0:
         rem = abs(rem)
 
@@ -188,37 +188,37 @@ def remain_secs_in_current_year(secs) -> int:
 
 
 def calc_day(secs) -> int:
-    """Helper func: Converts seconds to a day"""
+    """Helper func: Converts seconds to a DAY"""
     m = calc_month(secs)
     rem_secs = remain_secs_in_current_year(secs)
-    if leap_yr(calc_year(secs) + epoc_year):
+    if leap_yr(calc_year(secs) + EPOCH_YEAR):
         return calc_day_leap(m, rem_secs)
     else:
         return calc_day_comm(m, rem_secs)
 
 
 def calc_day_leap(m, rem_secs) -> int:
-    """Helper func: Converts seconds to a day for a leap year"""
+    """Helper func: Converts seconds to a DAY for a leap YEAR"""
     counter = 0
     internal_counter = 0
     while counter <= m:
         if counter > 11 and internal_counter > 11:
             internal_counter = 0
         num_days = LEAP_MONTH_DAYS[internal_counter]
-        total_sec_in_month = num_days * day
-        if math.ceil((total_sec_in_month - rem_secs) / day) == \
+        total_sec_in_month = num_days * DAY
+        if math.ceil((total_sec_in_month - rem_secs) / DAY) == \
                 LEAP_MONTH_DAYS[internal_counter] - 1:
             return 0
-        elif math.ceil((total_sec_in_month - rem_secs) / day) >= \
+        elif math.ceil((total_sec_in_month - rem_secs) / DAY) >= \
                 LEAP_MONTH_DAYS[internal_counter]:
             return 0
-        elif math.ceil((total_sec_in_month - rem_secs) / day) == 1:
+        elif math.ceil((total_sec_in_month - rem_secs) / DAY) == 1:
             return 0
         elif rem_secs - total_sec_in_month < 0:
             if counter > 11:
-                return math.ceil(rem_secs / day) + 1
+                return math.ceil(rem_secs / DAY) + 1
             else:
-                return math.floor(rem_secs / day) + 1
+                return math.floor(rem_secs / DAY) + 1
         else:
             rem_secs -= total_sec_in_month
             counter += 1
@@ -226,17 +226,17 @@ def calc_day_leap(m, rem_secs) -> int:
 
 
 def calc_day_comm(m, rem_secs) -> int:
-    """Helper func: Converts seconds to a day for a regular year"""
+    """Helper func: Converts seconds to a DAY for a regular YEAR"""
     counter = 0
     internal_counter = 0
     while counter <= m:
         if counter > 11 and internal_counter > 11:
             internal_counter = 0
         num_days = REG_MONTH_DAYS[internal_counter]
-        total_sec_in_month = num_days * day
+        total_sec_in_month = num_days * DAY
         if rem_secs - total_sec_in_month < 0:
             return REG_MONTH_DAYS[internal_counter] - \
-                   math.ceil((total_sec_in_month - rem_secs) / day)
+                   math.ceil((total_sec_in_month - rem_secs) / DAY)
         else:
             rem_secs -= total_sec_in_month
             counter += 1
@@ -250,18 +250,18 @@ def my_datetime(num_sec):
     get_calc_month = calc_month(num_sec)
     get_calc_day = calc_day(num_sec)
     # Handles case when 12/32/2000 to be 01/nn/2001
-    if get_calc_month + epoc_month == 12:
-        if get_calc_day + epoc_day > REG_MONTH_DAYS[11]:
+    if get_calc_month + EPOCH_MONTH == 12:
+        if get_calc_day + EPOCH_DAY > REG_MONTH_DAYS[11]:
             get_calc_month = 0
             get_calc_day = get_calc_day - REG_MONTH_DAYS[11]
             get_calc_year += 1
-    elif get_calc_month + epoc_month > 12:
+    elif get_calc_month + EPOCH_MONTH > 12:
         get_calc_year += 1
         get_calc_month = get_calc_month - 12
 
-    current_month = epoc_month + get_calc_month
-    current_day = epoc_day + get_calc_day
-    current_year = epoc_year + get_calc_year
+    current_month = EPOCH_MONTH + get_calc_month
+    current_day = EPOCH_DAY + get_calc_day
+    current_year = EPOCH_YEAR + get_calc_year
     return str(current_month).zfill(2) + '-' + str(current_day).zfill(
         2) + '-' + str(current_year)
 

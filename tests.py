@@ -11,7 +11,7 @@ class TestCase(unittest.TestCase):
     def test_leap_yr_func(self):
         self.assertTrue(leap_yr(2000))
 
-    # year 11,969
+    # YEAR 11,969
     def test_secs(self):
         self.assertTrue(my_datetime(315537963048))
 
@@ -33,37 +33,37 @@ class TestCase(unittest.TestCase):
             datetime.utcfromtimestamp(591235200).strftime('%m-%d-%Y'),
             my_datetime(591235200))
 
-    # 07-01-2707. Beginning of the month
+    # 07-01-2707. Beginning of the MONTH
     def test4(self):
         self.assertEqual(
             datetime.utcfromtimestamp(23273096400).strftime('%m-%d-%Y'),
             my_datetime(23273096400))
 
-    # 07-31-2185. End of the month
+    # 07-31-2185. End of the MONTH
     def test5(self):
         self.assertEqual(
             datetime.utcfromtimestamp(6803096400).strftime('%m-%d-%Y'),
             my_datetime(6803096400))
 
-    # 01-01-3131. Beginning of the year
+    # 01-01-3131. Beginning of the YEAR
     def test6(self):
         self.assertEqual(
             datetime.utcfromtimestamp(36637621200).strftime('%m-%d-%Y'),
             my_datetime(36637621200))
 
-    # 12-31-9999. End of the year
+    # 12-31-9999. End of the YEAR
     def test7(self):
         self.assertEqual(
             datetime.utcfromtimestamp(253402261200).strftime('%m-%d-%Y'),
             my_datetime(253402261200))
 
-    # 01-01-2201. Beginning of a non-leap year
+    # 01-01-2201. Beginning of a non-leap YEAR
     def test8(self):
         self.assertEqual(
             datetime.utcfromtimestamp(7289738124).strftime('%m-%d-%Y'),
             my_datetime(7289738124))
 
-    # 11-30-2007. random day
+    # 11-30-2007. random DAY
     def test9(self):
         self.assertEqual(
             datetime.utcfromtimestamp(1196402400).strftime('%m-%d-%Y'),
@@ -97,7 +97,7 @@ class TestCase(unittest.TestCase):
         self.assertEqual(datetime.utcfromtimestamp(1709164800).strftime(
             '%m-%d-%Y'), my_datetime(1709164800))
 
-    # LEAP: 03-01-2020. Beginning of the month after Feb (leap)
+    # LEAP: 03-01-2020. Beginning of the MONTH after Feb (leap)
     def test15(self):
         self.assertEqual(datetime.utcfromtimestamp(1583042400).strftime(
             '%m-%d-%Y'), my_datetime(1583042400))
